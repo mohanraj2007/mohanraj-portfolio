@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohanraj Portfolio</title>
+<link rel="icon" href="profile1.jpg">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#020617;
+    color:white;
+    overflow-x:hidden;
+}
+canvas{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+}
+.page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+.hidden{display:none;}
+
+.photo{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    border:4px solid white;
+    background:url("profile1.jpg") center/cover no-repeat;
+    margin:auto;
+}
+
+.btn{
+    margin-top:20px;
+    padding:12px 26px;
+    background:white;
+    color:black;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.btn:hover{transform:scale(1.1);}
+
+.back-btn{
+    position:absolute;
+    top:15px;
+    left:15px;
+    padding:8px 16px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.topic-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    margin:25px 0;
+}
+
+.topic-box{
+    background:rgba(0,0,0,0.85);
+    padding:15px 25px;
+    border-radius:14px;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.topic-box:hover{
+    box-shadow:0 0 25px rgba(255,255,255,0.5);
+}
+
+.content-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.content-box{
+    display:none;
+    background:rgba(0,0,0,0.9);
+    padding:20px;
+    border-radius:16px;
+    max-width:650px;
+    text-align:left;
+    animation:glow 2s infinite alternate;
+}
+.content-box.show{display:block;}
+
+@keyframes glow{
+    from{box-shadow:0 0 10px rgba(255,255,255,.2);}
+    to{box-shadow:0 0 25px rgba(255,255,255,.6);}
+}
+
+.project-link{
+    color:#5da9ff;
+    cursor:pointer;
+    text-decoration:underline;
+    font-weight:bold;
+    display:block;
+    margin-bottom:12px;
+}
+
+@media(max-width:768px){
+    .topic-box{width:90%;}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="canvas"></canvas>
+
+<!-- HOME PAGE -->
+<div id="homePage" class="page">
+    <div>
+        <div class="photo"></div>
+        <h1>Mohanraj V</h1>
+        <p>ECE Student | Embedded,IoT and VLSI </p>
+        <button class="btn" onclick="goToDetails()">Click Here to See More</button>
+    </div>
+</div>
+
+<!-- DETAILS PAGE -->
+<div id="detailsPage" class="page hidden">
+    <button class="back-btn" onclick="goBack()">⬅ Back</button>
+
+    <div>
+        <div class="photo"></div>
+
+        <div class="topic-grid">
+            <div class="topic-box" onclick="toggle('about')">About</div>
+            <div class="topic-box" onclick="toggle('education')">Education</div>
+            <div class="topic-box" onclick="toggle('projects')">Projects</div>
+            <div class="topic-box" onclick="toggle('skills')">Skills</div>
+            <div class="topic-box" onclick="toggle('workshop')">Workshop</div>
+            <div class="topic-box" onclick="toggle('contact')">Contact</div>
+        </div>
+
+        <div class="content-grid">
+
+            <div id="about" class="content-box">
+                I am Mohanraj V, an ECE student passionate about Embedded Systems, IoT, and VLSI fundamentals.
+                I enjoy working with electronics, digital logic, and programming to build efficient real-world systems.
+                My goal is to design optimized and reliable hardware–software solutions.
+                <br><br>
+                🔗 <a href="https://www.linkedin.com/in/mohanraj-v-667660328" target="_blank" style="color:#5da9ff">
+                LinkedIn Profile</a>
+            </div>
+
+            <div id="education" class="content-box">
+                <strong>B.E – ECE</strong><br>
+                Sona College of Technology<br>
+                Salem – 636005<br>
+                CGPA: 8.1%<br><br>
+                <strong>HSLC</strong><br>
+                Sri Krishna Matriculation HSS<br>
+                Grade: 89%
+            </div>
+
+            <div id="projects" class="content-box">
+                <span class="project-link" onclick="openGasProject()">Gas Monitoring System</span>
+                <span class="project-link" onclick="openOnionProject()">Improving Onion Storage & Shelf Life</span>
+            </div>
+
+            <div id="skills" class="content-box">
+                • C Programming<br>
+                • Python<br>
+                • Embedded Systems<br>
+                • IoT Basics<br>
+                • VLSI Fundamentals
+            </div>
+
+            <div id="workshop" class="content-box">
+                • Arduino Basics<br>
+                • PCB Design & Assembly<br>
+                • Robotics Workshop<br>
+                • Embedded Systems Workshop
+            </div>
+
+            <div id="contact" class="content-box">
+                📧 macmohanraj0502@gmail.com<br>
+                📞 7339643345
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+function goToDetails(){
+    homePage.classList.add("hidden");
+    detailsPage.classList.remove("hidden");
+}
+function goBack(){
+    detailsPage.classList.add("hidden");
+    homePage.classList.remove("hidden");
+}
+function toggle(id){
+    document.querySelectorAll(".content-box").forEach(b=>{
+        b.id===id ? b.classList.toggle("show") : b.classList.remove("show");
+    });
+}
+
+/* ---------- PROJECT TABS WITH FULL UI ---------- */
+
+function projectTemplate(title, steps){
+return `
+<!DOCTYPE html>
+<html>
+<head>
+<title>${title}</title>
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#020617;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+text-align:center;
+}
+.box{
+background:rgba(0,0,0,0.9);
+padding:30px;
+border-radius:20px;
+max-width:700px;
+animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+from{box-shadow:0 0 10px rgba(255,255,255,.3);}
+to{box-shadow:0 0 30px rgba(255,255,255,.7);}
+}
+h1{margin-bottom:20px;}
+.step{margin-bottom:12px;}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>${title}</h1>
+${steps.map(s=>`<div class="step">${s}</div>`).join("")}
+</div>
+</body>
+</html>`;
+}
+
+function openGasProject(){
+const w=window.open();
+w.document.write(projectTemplate(
+"Gas Monitoring System",
+[
+"🔹 Objective: Detect hazardous gases in industrial and domestic environments.",
+"🔹 Components:  MQ gas sensor(MQ-6), Arduino UNO R3, LCD, GSM900, buzzer.",
+"🔹 Working: Sensor detects gas and take the data and give the input to the Arduino microcontroller and then microcontroller process the data, If the data exceeds the safety level, automatically SMS and call alert to the user and display the value in lcd .",
+"🔹 Applications: Industries, gas pipelines, home safety.",
+"🔹 Outcome: Improves safety and prevents accidents."
+]));
+}
+
+function openOnionProject(){
+const w=window.open();
+w.document.write(projectTemplate(
+"Improving Onion Storage & Shelf Life",
+[
+"🔹 Objective: Reduce onion spoilage during storage.",
+"🔹 Components: MQ Sensor(MQ-135), Temperature sensor(DHT-22), Load cell(HX711), ESP32, LCD, GSM900, 5V DC Fan, Relay. .",
+"🔹 Working: Sense gas,temperature, Weight and give the data to the microcontroller and give the output to the lcd to display values and give alerts through GSM and if temperature exceed the DC fan automatically ON .",
+"🔹 Applications: Warehouses, agriculture storage.",
+"🔹 Outcome: Reduces wastage and increases shelf life."
+]));
+}
+
+/* ---------- SPIDER WEB BACKGROUND ---------- */
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;canvas.height=innerHeight;
+let dots=[];
+for(let i=0;i<120;i++)
+dots.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4});
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+dots.forEach(d=>{
+d.x+=d.vx;d.y+=d.vy;
+if(d.x<0||d.x>canvas.width)d.vx*=-1;
+if(d.y<0||d.y>canvas.height)d.vy*=-1;
+ctx.beginPath();ctx.arc(d.x,d.y,2,0,Math.PI*2);ctx.fillStyle="white";ctx.fill();
+dots.forEach(d2=>{
+let dist=Math.hypot(d.x-d2.x,d.y-d2.y);
+if(dist<120){
+ctx.strokeStyle=`rgba(255,255,255,${1-dist/120})`;
+ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(d2.x,d2.y);ctx.stroke();
+}
+});
+});
+requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
